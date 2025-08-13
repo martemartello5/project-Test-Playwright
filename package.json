@@ -1,0 +1,24 @@
+{
+  "name": "udemy2",
+  "version": "1.0.0",
+  "description": "automated software testing",
+  "main": "index.js",
+  "scripts": {
+    "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
+    "tests:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
+    "tests:webkit": "playwright test --config=playwright.config.ts --project=Webkit",
+    "tests:e2e": "playwright test --config=e2e.config.ts --project=Chromium",
+    "tests:visual:chrome": "playwright test --config=visual.config.ts --project=Chromium",
+    "tests:api": "playwright test --config=api.config.ts --project=Chromium"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@playwright/test": "^1.54.1",
+    "prettier": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0"
+  }
+}
