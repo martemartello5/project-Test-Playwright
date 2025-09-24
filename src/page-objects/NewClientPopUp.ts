@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test'
+import { Types } from '../generator/types'
 
 export class NewClientPopUp {
   readonly addClientButton: Locator
@@ -19,16 +20,18 @@ export class NewClientPopUp {
     await this.addClientButton.click()
   }
 
-  async enterName(name: string) {
-    await this.clientName.fill(name)
+  async enterName(client: Types.CLIENT) {
+    await this.clientName.fill(client.name)
   }
-  async selectPriority(priority: string) {
+  async selectPriority(client: Types.CLIENT) {
     await this.clientPrioriy.click()
-    await this.clientPrioriy.getByRole('option', { name: priority }).click()
+    await this.clientPrioriy
+      .getByRole('option', { name: client.priority })
+      .click()
   }
-  async selectType(type: string) {
+  async selectType(client: Types.CLIENT) {
     await this.clientType.click()
-    await this.clientType.getByRole('option', { name: type }).click()
+    await this.clientType.getByRole('option', { name: client.type }).click()
   }
   async createClient() {
     await this.createButton.click()

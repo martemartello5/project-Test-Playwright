@@ -13,6 +13,7 @@ let navBar: Navbar
 
 test.describe('Create client', () => {
   let clientData: Types.CLIENT
+  let updatedClientData: Types.CLIENT
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
     newClientPopUp = new NewClientPopUp(page)
@@ -25,22 +26,23 @@ test.describe('Create client', () => {
     )
     await expect(navBar.clients).toBeVisible()
     clientData = generateClient()
+    updatedClientData = generateClient({ type: clientData.type })
   })
 
   test('Create client + Edit client', async ({ page }) => {
     await navBar.clickOnTab('Clients')
     await newClientPopUp.openCreatePopUp()
-    await newClientPopUp.enterName(clientData.name)
+    await newClientPopUp.enterName(clientData)
     await page.keyboard.press('Enter')
     const errorMessage = page.locator(`text=can't be blank`)
     await expect(errorMessage).toHaveCount(2)
-    await newClientPopUp.selectPriority(clientData.priority)
-    await newClientPopUp.selectType(clientData.type)
+    await newClientPopUp.selectPriority(clientData)
+    await newClientPopUp.selectType(clientData)
     await newClientPopUp.createClient()
-    await clientInfoPage.assertName(clientData.name)
+    await clientInfoPage.assertName(clientData)
     await clientInfoPage.openEditMode()
-    await clientInfoPage.editType(clientData.type)
+    await clientInfoPage.editType(updatedClientData)
     await clientInfoPage.saveChanges()
-    await clientInfoPage.assertType(clientData.type)
+    await clientInfoPage.assertType(updatedClientData)
   })
 })
