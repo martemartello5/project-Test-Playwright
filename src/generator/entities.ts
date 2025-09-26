@@ -4,6 +4,6 @@ export namespace Entities {
     'Asset manager',
     'Consultancy',
     'Corporate',
-    'Hedge Funge',
+    'Hedge fund',
   ]
 }

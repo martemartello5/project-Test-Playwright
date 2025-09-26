@@ -17,12 +17,10 @@ export class LoginPage extends AbstractPage {
     )
   }
   //define login page methods
-  async visit() {
-    await this.page.goto(
-      'https://spot-crm-sq-new-table-master.test.prosapient.app/',
-    )
+  async visit(env) {
+    await this.page.goto(env)
   }
-  async login(username: string, password: string) {
+  async login(username, password) {
     await this.userNameInput.fill(username)
     await this.passwordInput.fill(password)
     await this.submitButton.click()
