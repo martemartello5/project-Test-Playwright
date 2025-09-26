@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test'
+import { Types } from '../generator/types'
 export class ClientInfoPage {
   readonly editTypeField: Locator
   readonly typeField: Locator
@@ -18,20 +19,20 @@ export class ClientInfoPage {
     await this.name.dblclick()
   }
 
-  async editType(type: string) {
+  async editType(client: Types.CLIENT) {
     await this.editTypeField.click()
-    await this.page.getByRole('option', { name: type }).click()
+    await this.page.getByRole('option', { name: client.type }).click()
   }
 
   async saveChanges() {
     await this.saveButton.click()
   }
 
-  async assertName(name: string) {
-    await expect(this.name).toContainText(name)
+  async assertName(client: Types.CLIENT) {
+    await expect(this.name).toContainText(client.name)
   }
 
-  async assertType(type: string) {
-    await expect(this.typeField).toContainText(type)
+  async assertType(client: Types.CLIENT) {
+    await expect(this.typeField).toContainText(client.type)
   }
 }
