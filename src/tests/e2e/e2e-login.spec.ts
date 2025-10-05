@@ -7,7 +7,7 @@ test.describe.parallel('Login/Logout Flow', () => {
   const admin_password = process.env.ADMIN_PASSWORD
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
-    loginPage = new Shared.LoginPage.LoginPage(page)
+    loginPage = new Shared.LoginPage.IndexPage(page)
     await loginPage.visit(environment)
   })
   test('Negative Scenario for Login', async ({ page }) => {

@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test'
 import { Types } from '../../../../generator/types'
 
 export namespace New {
-  export class NewClientPopUp {
+  export class IndexPage {
     readonly addClientButton: Locator
     readonly clientName: Locator
     readonly clientPrioriy: Locator
