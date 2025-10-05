@@ -1,7 +1,8 @@
 import { test, expect, Page } from '@playwright/test'
 import { faker } from '@faker-js/faker'
-import { LoginPage } from '../../page-objects/loginPage'
-import { NewClientPopUp } from '../../page-objects/NewClientPopUp'
+import { Admin } from '../../page-objects/admin'
+import { LoginPage } from '../../page-objects/LoginPage'
+//import { NewClientPopUp } from '../../page-objects/NewClientPopUp'
 import { ClientInfoPage } from '../../page-objects/ClientInfoPage'
 import { Navbar } from '../../page-objects/components/Navbar'
 import { generateClient } from '../../generator/factory'
@@ -9,11 +10,11 @@ import { Types } from '../../generator/types'
 import dotenv from 'dotenv'
 dotenv.config()
 let loginPage: LoginPage
-let newClientPopUp: NewClientPopUp
+let newClientPopUp
 let clientInfoPage: ClientInfoPage
 let navBar: Navbar
 
-test.describe('Create client', () => {
+test.describe.only('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
   const admin_email = process.env.ADMIN_EMAIL!
@@ -21,7 +22,7 @@ test.describe('Create client', () => {
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
-    newClientPopUp = new NewClientPopUp(page)
+    newClientPopUp = new Admin.Clients.New.NewClientPopUp(page)
     clientInfoPage = new ClientInfoPage(page)
     navBar = new Navbar(page)
     await loginPage.visit(environment)
