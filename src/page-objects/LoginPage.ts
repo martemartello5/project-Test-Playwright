@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { AbstractPage } from './AbstractPage'
-import { th } from '@faker-js/faker'
 
 export class LoginPage extends AbstractPage {
   readonly userNameInput: Locator

@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { Types } from '../generator/types'
+import { Types } from '../../../../../generator/types'
+export namespace ClientInfo {
 export class ClientInfoPage {
   readonly editTypeField: Locator
   readonly typeField: Locator
@@ -35,4 +36,5 @@ export class ClientInfoPage {
   async assertType(client: Types.CLIENT) {
     await expect(this.typeField).toContainText(client.type)
   }
+}
 }

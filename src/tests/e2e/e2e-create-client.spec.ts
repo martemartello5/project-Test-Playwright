@@ -2,19 +2,19 @@ import { test, expect, Page } from '@playwright/test'
 import { faker } from '@faker-js/faker'
 import { Admin } from '../../page-objects/admin'
 import { LoginPage } from '../../page-objects/LoginPage'
-//import { NewClientPopUp } from '../../page-objects/NewClientPopUp'
-import { ClientInfoPage } from '../../page-objects/ClientInfoPage'
 import { Navbar } from '../../page-objects/components/Navbar'
 import { generateClient } from '../../generator/factory'
 import { Types } from '../../generator/types'
 import dotenv from 'dotenv'
+import { New } from '../../page-objects/admin/clients/new'
+import { ClientInfo } from '../../page-objects/admin/clients/&/info'
 dotenv.config()
 let loginPage: LoginPage
-let newClientPopUp
-let clientInfoPage: ClientInfoPage
+let newClientPopUp: New.NewClientPopUp
+let clientInfoPage: ClientInfo.ClientInfoPage
 let navBar: Navbar
 
-test.describe.only('Create client', () => {
+test.describe('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
   const admin_email = process.env.ADMIN_EMAIL!
@@ -23,7 +23,9 @@ test.describe.only('Create client', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
     newClientPopUp = new Admin.Clients.New.NewClientPopUp(page)
-    clientInfoPage = new ClientInfoPage(page)
+    clientInfoPage = new Admin.Clients.ClientGeneral.ClientInfo.ClientInfoPage(
+      page,
+    )
     navBar = new Navbar(page)
     await loginPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
