@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../../page-objects/loginPage'
+import { Shared } from '../../page-objects/shared'
+//import { LoginPage } from '../../page-objects/loginPage'
 test.describe.parallel('Login/Logout Flow', () => {
-  let loginPage: LoginPage
+  let loginPage
   const admin_email = process.env.ADMIN_EMAIL
   const admin_password = process.env.ADMIN_PASSWORD
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page)
+    loginPage = new Shared.LoginPage.LoginPage(page)
     await loginPage.visit(environment)
   })
   test('Negative Scenario for Login', async ({ page }) => {

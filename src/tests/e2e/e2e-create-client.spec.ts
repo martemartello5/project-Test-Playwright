@@ -1,7 +1,7 @@
 import { test, expect, Page } from '@playwright/test'
 import { faker } from '@faker-js/faker'
 import { Admin } from '../../page-objects/admin'
-import { LoginPage } from '../../page-objects/LoginPage'
+import { Shared } from '../../page-objects/shared'
 import { Navbar } from '../../page-objects/components/Navbar'
 import { generateClient } from '../../generator/factory'
 import { Types } from '../../generator/types'
@@ -9,11 +9,10 @@ import dotenv from 'dotenv'
 import { New } from '../../page-objects/admin/clients/new'
 import { ClientInfo } from '../../page-objects/admin/clients/&/info'
 dotenv.config()
-let loginPage: LoginPage
+let loginPage //: { visit: (arg0: string | undefined) => any; login: (arg0: string, arg1: string) => any }
 let newClientPopUp: New.NewClientPopUp
 let clientInfoPage: ClientInfo.ClientInfoPage
 let navBar: Navbar
-
 test.describe('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
@@ -21,7 +20,7 @@ test.describe('Create client', () => {
   const admin_password = process.env.ADMIN_PASSWORD!
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page)
+    loginPage = new Shared.LoginPage.LoginPage(page)
     newClientPopUp = new Admin.Clients.New.NewClientPopUp(page)
     clientInfoPage = new Admin.Clients.ClientGeneral.ClientInfo.ClientInfoPage(
       page,
