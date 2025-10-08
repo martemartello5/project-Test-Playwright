@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 import { New } from '../../page-objects/admin/clients/new'
 import { ClientInfo } from '../../page-objects/admin/clients/&/info'
 import { LoginPage } from '../../page-objects/shared/LoginPage'
-import { Navbar } from '../../page-objects/shared/Navbar'
+import { Navbar } from '../../page-objects/components/Navbar'
 dotenv.config()
 let loginPage: LoginPage.IndexPage
 let newClientPopUp: New.IndexPage
@@ -23,7 +23,7 @@ test.describe('Create client', () => {
     loginPage = new Shared.LoginPage.IndexPage(page)
     newClientPopUp = new Admin.Clients.New.IndexPage(page)
     clientInfoPage = new Admin.Clients.ClientGeneral.ClientInfo.IndexPage(page)
-    navBar = new Shared.Navbar.IndexPage(page)
+    navBar = new Navbar.IndexPage(page)
     await loginPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
     await expect(navBar.clients).toBeVisible()

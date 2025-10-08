@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { AbstractPage } from './AbstractPage'
+import { AbstractPage } from '../AbstractPage'
 
 export namespace LoginPage {
-  export class IndexPage extends AbstractPage.IndexPage {
+  export class IndexPage extends AbstractPage{
     readonly userNameInput: Locator
     readonly passwordInput: Locator
     readonly submitButton: Locator
