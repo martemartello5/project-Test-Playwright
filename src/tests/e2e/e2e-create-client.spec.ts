@@ -31,7 +31,7 @@ test.describe('Create client', () => {
     updatedClientData = generateClient({ type: clientData.type })
   })
 
-  test.only('Create client + Edit client', async ({ page }) => {
+  test('Create client + Edit client', async ({ page }) => {
     await navBar.clickOnTab('Clients')
     await newClientPopUp.openCreatePopUp()
     await newClientPopUp.enterName(clientData)

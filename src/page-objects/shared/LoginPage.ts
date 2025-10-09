@@ -22,7 +22,7 @@ export namespace LoginPage {
     async visit(env) {
       await this.page.goto(env)
     }
-    async login(username, password) {
+    async login(username: string, password: string) {
       await this.userNameInput.fill(username)
       await this.passwordInput.fill(password)
       await this.submitButton.click()

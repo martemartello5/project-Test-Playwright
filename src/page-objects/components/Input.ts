@@ -13,7 +13,7 @@ export class Input {
   async asserValue(value: string) {
     await expect(this.component).toContainText(value.toString())
   }
-  async doubleClick (){
+  async doubleClick() {
     await this.component.dblclick()
   }
 }
