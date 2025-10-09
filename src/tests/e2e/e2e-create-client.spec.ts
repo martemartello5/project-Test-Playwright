@@ -12,7 +12,7 @@ dotenv.config()
 let loginPage: LoginPage.IndexPage
 let newClientPopUp: New.IndexPage
 let clientInfoPage: ClientInfo.IndexPage
-let navBar: Navbar.IndexPage
+let navBar: Navbar
 test.describe('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
@@ -23,7 +23,7 @@ test.describe('Create client', () => {
     loginPage = new Shared.LoginPage.IndexPage(page)
     newClientPopUp = new Admin.Clients.New.IndexPage(page)
     clientInfoPage = new Admin.Clients.ClientGeneral.ClientInfo.IndexPage(page)
-    navBar = new Navbar.IndexPage(page)
+    navBar = new Navbar(page)
     await loginPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
     await expect(navBar.clients).toBeVisible()

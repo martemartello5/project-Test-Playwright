@@ -1,20 +1,22 @@
 import { Locator, Page } from '@playwright/test'
 import { Types } from '../../../../generator/types'
-
+import { Button } from '../../../components/Button'
+import { Input } from '../../../components/Input'
+import { Select } from '../../../components/Select'
 export namespace New {
   export class IndexPage {
-    readonly addClientButton: Locator
-    readonly clientName: Locator
-    readonly clientPrioriy: Locator
-    readonly clientType: Locator
-    readonly createButton: Locator
+    readonly addClientButton: Button
+    readonly clientName: Input
+    readonly clientPrioriy: Select
+    readonly clientType: Select
+    readonly createButton: Button
 
     constructor(readonly page: Page) {
-      this.addClientButton = page.locator('text=Add client')
-      this.clientName = page.locator('[label="Name"]')
-      this.clientPrioriy = page.locator('[data-test-id="priority-select"]')
-      this.clientType = page.locator('[data-test-id="client-type-select"]')
-      this.createButton = page.locator('text=Create client')
+      this.addClientButton = new Button(page, 'text=Add client')
+      this.clientName = new Input(page, '[label="Name"]')
+      this.clientPrioriy = new Select(page, '[data-test-id="priority-select"]')
+      this.clientType = new Select(page, '[data-test-id="client-type-select"]')
+      this.createButton = new Button(page, 'text=Create client')
     }
 
     async openCreatePopUp() {
@@ -26,13 +28,11 @@ export namespace New {
     }
     async selectPriority(client: Types.CLIENT) {
       await this.clientPrioriy.click()
-      await this.clientPrioriy
-        .getByRole('option', { name: client.priority })
-        .click()
+      await this.clientPrioriy.selectOption(client.priority)
     }
     async selectType(client: Types.CLIENT) {
       await this.clientType.click()
-      await this.clientType.getByRole('option', { name: client.type }).click()
+      await this.clientType.selectOption(client.type)
     }
     async createClient() {
       await this.createButton.click()

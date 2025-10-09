@@ -1,18 +1,20 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { AbstractPage } from '../AbstractPage'
-
+import { Button } from '../components/Button'
+import { Input } from '../components/Input'
 export namespace LoginPage {
-  export class IndexPage extends AbstractPage{
-    readonly userNameInput: Locator
-    readonly passwordInput: Locator
-    readonly submitButton: Locator
-    readonly errorMessage: Locator
+  export class IndexPage extends AbstractPage {
+    readonly userNameInput: Input
+    readonly passwordInput: Input
+    readonly submitButton: Button
+    readonly errorMessage: Input
     constructor(page: Page) {
       super(page)
-      this.userNameInput = page.locator('[name="login"]')
-      this.passwordInput = page.locator('[name="password"]')
-      this.submitButton = page.locator('text=Sign i')
-      this.errorMessage = page.locator(
+      this.userNameInput = new Input(page, '[name="login"]')
+      this.passwordInput = new Input(page, '[name="password"]')
+      this.submitButton = new Button(page, 'text=Sign i')
+      this.errorMessage = new Input(
+        page,
         'text=Incorrect email or password, please try again.',
       )
     }
@@ -20,25 +22,15 @@ export namespace LoginPage {
     async visit(env) {
       await this.page.goto(env)
     }
-    async login(username, password) {
+    async login(username: string, password: string) {
       await this.userNameInput.fill(username)
       await this.passwordInput.fill(password)
       await this.submitButton.click()
     }
 
     async assertErrorMessage() {
-      await expect(this.errorMessage).toContainText(
+      await this.errorMessage.asserValue(
         'Incorrect email or password, please try again.',
-      )
-    }
-    async snapshotPasswordInput() {
-      expect(await this.passwordInput.screenshot()).toMatchSnapshot(
-        'password-input.png',
-      )
-    }
-    async snaphotErrorMessage() {
-      expect(await this.errorMessage.screenshot()).toMatchSnapshot(
-        'loginErrorMessage.png',
       )
     }
   }
