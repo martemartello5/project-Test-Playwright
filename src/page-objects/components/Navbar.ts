@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test'
-export namespace Navbar {
-  export class IndexPage {
+  export class Navbar {
     readonly page: Page
     readonly dashboard: Locator
     readonly clients: Locator
@@ -49,4 +48,3 @@ export namespace Navbar {
       }
     }
   }
-}

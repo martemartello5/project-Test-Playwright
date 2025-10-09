@@ -1,19 +1,22 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { Types } from '../../../../../generator/types'
+import { Button } from '../../../../components/Button'
+import { Icon } from '../../../../components/Icon'
 export namespace ClientInfo {
   export class IndexPage {
-    readonly editTypeField: Locator
+    readonly editTypeField: Icon
     readonly typeField: Locator
     readonly name: Locator
-    readonly saveButton: Locator
+    readonly saveButton: Button
 
     constructor(readonly page: Page) {
       this.name = page.locator('[data-test-id="details-client-name"]')
-      this.editTypeField = page.locator(
+      this.editTypeField = new Icon(
+        page,
         '[data-test-id="select-input-type-select"]',
       )
       this.typeField = page.locator('[data-test-id="details-type"]')
-      this.saveButton = page.locator('text=Save')
+      this.saveButton = new Button(page, 'text=Save')
     }
 
     async openEditMode() {

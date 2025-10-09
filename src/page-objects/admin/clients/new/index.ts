@@ -1,20 +1,21 @@
 import { Locator, Page } from '@playwright/test'
 import { Types } from '../../../../generator/types'
+import { Button } from '../../../components/Button'
 
 export namespace New {
   export class IndexPage {
-    readonly addClientButton: Locator
+    readonly addClientButton: Button
     readonly clientName: Locator
     readonly clientPrioriy: Locator
     readonly clientType: Locator
-    readonly createButton: Locator
+    readonly createButton: Button
 
     constructor(readonly page: Page) {
-      this.addClientButton = page.locator('text=Add client')
+      this.addClientButton = new Button(page, 'text=Add client')
       this.clientName = page.locator('[label="Name"]')
       this.clientPrioriy = page.locator('[data-test-id="priority-select"]')
       this.clientType = page.locator('[data-test-id="client-type-select"]')
-      this.createButton = page.locator('text=Create client')
+      this.createButton = new Button(page, 'text=Create client')
     }
 
     async openCreatePopUp() {
