@@ -8,7 +8,6 @@ import { New } from '../../page-objects/admin/clients/new'
 import { ClientInfo } from '../../page-objects/admin/clients/&/info'
 import { LoginPage } from '../../page-objects/shared/LoginPage'
 import { Navbar } from '../../page-objects/components/Navbar'
-import { Button } from '../../page-objects/components/Button'
 dotenv.config()
 let loginPage: LoginPage.IndexPage
 let newClientPopUp: New.IndexPage
