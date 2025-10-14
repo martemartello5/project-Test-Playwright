@@ -7,3 +7,4 @@ export class AbstractPage {
     await this.page.waitForTimeout(time)
   }
 }
+//readonly navbar
