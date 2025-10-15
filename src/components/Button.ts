@@ -1,11 +1,8 @@
 import { Locator, Page } from '@playwright/test'
-export class Button {
-  readonly page: Page
-  readonly component: Locator
-
+import { BaseComponent } from './Component'
+export class Button extends BaseComponent {
   constructor(page: Page, selector: string) {
-    this.page = page
-    this.component = page.locator(selector)
+    super(page, selector)
   }
   async click() {
     await this.component.click()

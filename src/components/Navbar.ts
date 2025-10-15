@@ -1,14 +1,12 @@
 import { Locator, Page } from '@playwright/test'
 export class Navbar {
-  readonly page: Page
   readonly dashboard: Locator
   readonly clients: Locator
   readonly projects: Locator
   readonly proAgent: Locator
   readonly expertSearch: Locator
 
-  constructor(page: Page) {
-    this.page = page
+  constructor(private readonly page: Page) {
     this.dashboard = page
       .locator('[data-test-id="admin-navigation-sidebar"] ul > li')
       .nth(1)
@@ -26,7 +24,7 @@ export class Navbar {
       .nth(5)
   }
 
-  async clickOnTab(tabName) {
+  async clickOnTab(tabName: string) {
     switch (tabName) {
       case 'Clients':
         await this.clients.click()

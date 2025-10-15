@@ -1,11 +1,8 @@
 import { Locator, Page, expect } from '@playwright/test'
-export class Input {
-  readonly page: Page
-  readonly component: Locator
-
+import { BaseComponent } from './Component'
+export class Input extends BaseComponent {
   constructor(page: Page, selector: string) {
-    this.page = page
-    this.component = page.locator(selector)
+    super(page, selector)
   }
   async fill(value: string) {
     await this.component.fill(value)

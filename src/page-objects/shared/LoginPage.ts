@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { AbstractPage } from '../AbstractPage'
-import { Button } from '../components/Button'
-import { Input } from '../components/Input'
+import { Button } from '../../components/Button'
+import { Input } from '../../components/Input'
 export namespace LoginPage {
   export class IndexPage extends AbstractPage {
     readonly userNameInput: Input

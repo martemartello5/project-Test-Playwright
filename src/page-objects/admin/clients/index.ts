@@ -1,7 +1,7 @@
 import { Page } from 'playwright/test'
 import { AbstractPage } from '../../AbstractPage'
 import { $ as _$ } from './$'
-import { Button } from '../../components/Button'
+import { Button } from '../../../components/Button'
 import { CreateClientModal } from './components/CreateClientModal'
 export namespace Clients {
   export const $ = _$
@@ -18,5 +18,3 @@ export namespace Clients {
     }
   }
 }
-//add button to open modal
-// read about camelcase - when name from capital letter
