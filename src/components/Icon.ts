@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
-import { BaseComponent } from './Component'
-export class Icon extends BaseComponent {
+import { Component } from './Component'
+export class Icon extends Component {
   constructor(page: Page, selector: string) {
     super(page, selector)
   }

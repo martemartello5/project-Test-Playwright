@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test'
-import { Navbar } from '../components/Navbar'
+import { Navbar } from 'components/Navbar'
 
 export class AbstractPage {
   readonly navbar: Navbar
@@ -12,5 +12,8 @@ export class AbstractPage {
   }
   async selectTab(tab: string) {
     await this.navbar.clickOnTab(tab)
+  }
+  async visit(env: string) {
+    await this.page.goto(env)
   }
 }

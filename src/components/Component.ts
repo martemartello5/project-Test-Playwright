@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test'
-export class BaseComponent {
+export class Component {
   readonly component: Locator
   readonly page: Page
   constructor(page: Page, selector: string) {

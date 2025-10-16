@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { Types } from '../../../../../generator/types'
-import { Button } from '../../../../../components/Button'
-import { Icon } from '../../../../../components/Icon'
-import { Input } from '../../../../../components/Input'
+import { Types } from 'generator/types'
+import { Button } from 'components/Button'
+import { Icon } from 'components/Icon'
+import { Input } from 'components/Input'
 export namespace ClientInfo {
   export class IndexPage {
     readonly editTypeField: Icon

@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test'
-import { BaseComponent } from './Component'
-export class Select extends BaseComponent {
+import { Component } from './Component'
+export class Select extends Component {
   constructor(page: Page, selector: string) {
     super(page, selector)
   }

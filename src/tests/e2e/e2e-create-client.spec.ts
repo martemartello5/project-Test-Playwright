@@ -1,11 +1,10 @@
 import { test, expect, Page } from '@playwright/test'
-import { Admin } from '../../page-objects/admin'
-import { Shared } from '../../page-objects/shared'
-import { generateClient } from '../../generator/factory'
-import { Types } from '../../generator/types'
-import dotenv from 'dotenv'
-import { AbstractPage } from '../../page-objects/AbstractPage'
-dotenv.config()
+import { Admin } from 'page-objects/admin'
+import { Shared } from 'page-objects/shared'
+import { generateClient } from 'generator/factory'
+import { Types } from 'generator/types'
+import { AbstractPage } from 'page-objects/AbstractPage'
+require('dotenv').config()
 test.describe('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
@@ -14,7 +13,8 @@ test.describe('Create client', () => {
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
     const loginPage = new Shared.LoginPage.IndexPage(page)
-    await loginPage.visit(environment)
+    const signupPage = new AbstractPage(page)
+    await signupPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
     clientData = generateClient()
     updatedClientData = generateClient({ type: clientData.type })

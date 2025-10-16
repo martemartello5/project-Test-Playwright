@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { AbstractPage } from '../AbstractPage'
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
+import { AbstractPage } from 'page-objects/AbstractPage'
+import { Button } from 'components/Button'
+import { Input } from 'components/Input'
 export namespace LoginPage {
   export class IndexPage extends AbstractPage {
     readonly userNameInput: Input
@@ -17,10 +17,6 @@ export namespace LoginPage {
         page,
         'text=Incorrect email or password, please try again.',
       )
-    }
-    //define login page methods
-    async visit(env) {
-      await this.page.goto(env)
     }
     async login(username: string, password: string) {
       await this.userNameInput.fill(username)
