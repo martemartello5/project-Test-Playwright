@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { Page } from '@playwright/test'
 import { AbstractPage } from 'page-objects/AbstractPage'
 import { Button } from 'components/Button'
 import { Input } from 'components/Input'
@@ -25,7 +25,7 @@ export namespace LoginPage {
     }
 
     async assertErrorMessage() {
-      await this.errorMessage.asserValue(
+      await this.errorMessage.assertValue(
         'Incorrect email or password, please try again.',
       )
     }

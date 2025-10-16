@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { Page } from '@playwright/test'
 import { Types } from 'generator/types'
 import { Button } from 'components/Button'
 import { Icon } from 'components/Icon'
@@ -6,7 +6,7 @@ import { Input } from 'components/Input'
 export namespace ClientInfo {
   export class IndexPage {
     readonly editTypeField: Icon
-    readonly typeField: Locator
+    readonly typeField: Input
     readonly name: Input
     readonly saveButton: Button
 
@@ -16,7 +16,7 @@ export namespace ClientInfo {
         page,
         '[data-test-id="select-input-type-select"]',
       )
-      this.typeField = page.locator('[data-test-id="details-type"]')
+      this.typeField = new Input(page, '[data-test-id="details-type"]')
       this.saveButton = new Button(page, 'text=Save')
     }
 
@@ -34,11 +34,11 @@ export namespace ClientInfo {
     }
 
     async assertName(client: Types.CLIENT) {
-      await this.name.asserValue(client.name)
+      await this.name.assertValue(client.name)
     }
 
     async assertType(client: Types.CLIENT) {
-      await expect(this.typeField).toContainText(client.type)
+      await this.typeField.assertValue(client.type)
     }
   }
 }

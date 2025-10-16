@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test'
+import { Page, expect } from '@playwright/test'
 import { Component } from './Component'
 export class Input extends Component {
   constructor(page: Page, selector: string) {
@@ -7,7 +7,7 @@ export class Input extends Component {
   async fill(value: string) {
     await this.component.fill(value)
   }
-  async asserValue(value: string) {
+  async assertValue(value: string) {
     await expect(this.component).toContainText(value.toString())
   }
   async doubleClick() {

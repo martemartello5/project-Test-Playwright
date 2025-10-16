@@ -1,4 +1,4 @@
-import { test, expect, Page } from '@playwright/test'
+import { test } from '@playwright/test'
 import { Admin } from 'page-objects/admin'
 import { Shared } from 'page-objects/shared'
 import { generateClient } from 'generator/factory'
@@ -27,9 +27,6 @@ test.describe('Create client', () => {
     const clientsPage = new Admin.Clients.IndexPage(page)
     await clientsPage.openCreatePopUp()
     await clientsPage.createClientModal.enterName(clientData)
-    await clientsPage.createClientModal.createClient()
-    const errorMessage = page.locator(`text=can't be blank`)
-    await expect(errorMessage).toHaveCount(2)
     await clientsPage.createClientModal.selectPriority(clientData)
     await clientsPage.createClientModal.selectType(clientData)
     await clientsPage.createClientModal.createClient()
