@@ -1,6 +1,20 @@
-import { New as _New } from './new'
-import { ClientGeneral as _ClientGeneral } from './&'
+import { Page } from 'playwright/test'
+import { AbstractPage } from 'page-objects/AbstractPage'
+import { $ as _$ } from './$'
+import { Button } from 'components/Button'
+import { CreateClientModal } from './components/CreateClientModal'
 export namespace Clients {
-  export const New = _New
-  export const ClientGeneral = _ClientGeneral
+  export const $ = _$
+  export class IndexPage extends AbstractPage {
+    readonly addClientButton: Button
+    readonly createClientModal: CreateClientModal
+    constructor(readonly page: Page) {
+      super(page)
+      this.addClientButton = new Button(page, 'text=Add client')
+      this.createClientModal = new CreateClientModal(page)
+    }
+    async openCreatePopUp() {
+      await this.addClientButton.click()
+    }
+  }
 }

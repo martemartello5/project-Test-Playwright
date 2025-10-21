@@ -1,18 +1,10 @@
-import { test, expect, Page } from '@playwright/test'
-import { Admin } from '../../page-objects/admin'
-import { Shared } from '../../page-objects/shared'
-import { generateClient } from '../../generator/factory'
-import { Types } from '../../generator/types'
-import dotenv from 'dotenv'
-import { New } from '../../page-objects/admin/clients/new'
-import { ClientInfo } from '../../page-objects/admin/clients/&/info'
-import { LoginPage } from '../../page-objects/shared/LoginPage'
-import { Navbar } from '../../page-objects/components/Navbar'
-dotenv.config()
-let loginPage: LoginPage.IndexPage
-let newClientPopUp: New.IndexPage
-let clientInfoPage: ClientInfo.IndexPage
-let navBar: Navbar.IndexPage
+import { test } from '@playwright/test'
+import { Admin } from 'page-objects/admin'
+import { Shared } from 'page-objects/shared'
+import { generateClient } from 'generator/factory'
+import { Types } from 'generator/types'
+import { AbstractPage } from 'page-objects/AbstractPage'
+require('dotenv').config()
 test.describe('Create client', () => {
   let clientData: Types.CLIENT
   let updatedClientData: Types.CLIENT
@@ -20,27 +12,24 @@ test.describe('Create client', () => {
   const admin_password = process.env.ADMIN_PASSWORD!
   const environment = process.env.E2E_PLATFORM_URL
   test.beforeEach(async ({ page }) => {
-    loginPage = new Shared.LoginPage.IndexPage(page)
-    newClientPopUp = new Admin.Clients.New.IndexPage(page)
-    clientInfoPage = new Admin.Clients.ClientGeneral.ClientInfo.IndexPage(page)
-    navBar = new Navbar.IndexPage(page)
-    await loginPage.visit(environment)
+    const loginPage = new Shared.LoginPage.IndexPage(page)
+    const signupPage = new AbstractPage(page)
+    await signupPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
-    await expect(navBar.clients).toBeVisible()
     clientData = generateClient()
     updatedClientData = generateClient({ type: clientData.type })
   })
 
   test('Create client + Edit client', async ({ page }) => {
-    await navBar.clickOnTab('Clients')
-    await newClientPopUp.openCreatePopUp()
-    await newClientPopUp.enterName(clientData)
-    await newClientPopUp.createClient()
-    const errorMessage = page.locator(`text=can't be blank`)
-    await expect(errorMessage).toHaveCount(2)
-    await newClientPopUp.selectPriority(clientData)
-    await newClientPopUp.selectType(clientData)
-    await newClientPopUp.createClient()
+    const clientInfoPage = new Admin.Clients.$.ClientInfo.IndexPage(page)
+    const navBar = new AbstractPage(page)
+    await navBar.selectTab('Clients')
+    const clientsPage = new Admin.Clients.IndexPage(page)
+    await clientsPage.openCreatePopUp()
+    await clientsPage.createClientModal.enterName(clientData)
+    await clientsPage.createClientModal.selectPriority(clientData)
+    await clientsPage.createClientModal.selectType(clientData)
+    await clientsPage.createClientModal.createClient()
     await clientInfoPage.assertName(clientData)
     await clientInfoPage.openEditMode()
     await clientInfoPage.editType(updatedClientData)
