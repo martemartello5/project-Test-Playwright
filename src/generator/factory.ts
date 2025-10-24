@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { getRandomItemFromArray } from '../utils/data-helpers'
 import { Entities } from './entities'
 import { Types } from './types'
+import { S } from '@faker-js/faker/dist/airline-CLphikKp'
 export function generateClient(options?: {
   name?: string
   priority?: string
@@ -16,5 +17,31 @@ export function generateClient(options?: {
     priority: priority,
     type: type,
     isChargeCodeRequired: true,
+  }
+}
+export function generateFakeEmail() {
+  const random = Math.random().toString(36).substring(2, 10)
+  return `user_${random}@aqa.prosapient.com`
+}
+
+export function generateIndividualDncExpert(options?: {
+  email?: string
+  linkedinUrl?: string
+  firstName?: string
+  lastName?: string
+  reason?: string
+  requestedBy?: string
+}) {
+  const firstName = faker.person.firstName()
+  const lastName = faker.person.lastName()
+  const email = generateFakeEmail()
+  const reason = getRandomItemFromArray(Entities.individualDncReasonList)
+  const requestedBy = 'AQA SuperAdmin'
+  return {
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    reason: reason,
+    requestedBy: requestedBy,
   }
 }
