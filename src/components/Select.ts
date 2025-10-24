@@ -7,6 +7,9 @@ export class Select extends Component {
   async click() {
     await this.component.click()
   }
+  async typeValue(value: string) {
+    await this.component.fill(value)
+  }
   async selectOption(value: string) {
     await this.component.getByRole('option', { name: value }).click()
   }

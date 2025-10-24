@@ -3,9 +3,8 @@ import { Types } from 'generator/types'
 import { Button } from 'components/Button'
 import { Input } from 'components/Input'
 import { Select } from 'components/Select'
-import { ne } from '@faker-js/faker/.'
 
-export class AddIndividualDncExpertModal {
+export class IndividualDncExpertModal {
   readonly email: Select
   readonly linkedinUrl: Select
   readonly firstName: Input
@@ -16,18 +15,18 @@ export class AddIndividualDncExpertModal {
   readonly cancelButton: Button
 
   constructor(readonly page: Page) {
-    this.email = new Select(
+    ;(((this.email = new Select(
       page,
-      '[data-test-id="select-value-container-individual-dnc-email-select]',
-    )
-    this.linkedinUrl = new Select(
+      '[data-test-id="individual-dnc-email-select"]',
+    )),
+    (this.linkedinUrl = new Select(
       page,
       '[data-test-id="individual-dnc-linkedin-select"]',
-    )
-    this.firstName = new Input(
-      page,
-      '[data-test-id="individual-dnc-first-name"]',
-    )
+    ))),
+      (this.firstName = new Input(
+        page,
+        '[data-test-id="individual-dnc-first-name"]',
+      )))
     this.lastName = new Input(page, '[data-test-id="individual-dnc-last-name"]')
     this.reason = new Select(
       page,
@@ -49,10 +48,12 @@ export class AddIndividualDncExpertModal {
 
   async enterEmail(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
     await this.email.click()
+    await this.email.typeValue(dncExpert.email)
     await this.email.selectOption(dncExpert.email)
   }
   async enterLinkedinUrl(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
     await this.linkedinUrl.click()
+    await this.linkedinUrl.typeValue(dncExpert.linkedinUrl)
     await this.linkedinUrl.selectOption(dncExpert.linkedinUrl)
   }
   async enterFirstName(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {

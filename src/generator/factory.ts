@@ -23,6 +23,10 @@ export function generateFakeEmail() {
   const random = Math.random().toString(36).substring(2, 10)
   return `user_${random}@aqa.prosapient.com`
 }
+export function generateFakeLinkedinUrl() {
+  const random = Math.random().toString(36).substring(2, 10)
+  return `https://www.linkedin.com/in/random/${random}`
+}
 
 export function generateIndividualDncExpert(options?: {
   email?: string
@@ -37,11 +41,13 @@ export function generateIndividualDncExpert(options?: {
   const email = generateFakeEmail()
   const reason = getRandomItemFromArray(Entities.individualDncReasonList)
   const requestedBy = 'AQA SuperAdmin'
+  const linkedinUrl = generateFakeLinkedinUrl()
   return {
     email: email,
     firstName: firstName,
     lastName: lastName,
     reason: reason,
     requestedBy: requestedBy,
+    linkedinUrl: linkedinUrl,
   }
 }
