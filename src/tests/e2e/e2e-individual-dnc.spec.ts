@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import { Admin } from 'page-objects/admin'
 import { Shared } from 'page-objects/shared'
-import { generateClient, generateIndividualDncExpert } from 'generator/factory'
+import { generateIndividualDncExpert } from 'generator/factory'
 import { Types } from 'generator/types'
 import { AbstractPage } from 'page-objects/AbstractPage'
 require('dotenv').config()
@@ -17,24 +17,15 @@ test.describe('Individual DNC expert', () => {
     await loginPage.login(admin_email, admin_password)
     individualDncExpertData = generateIndividualDncExpert()
   })
-  test.only('Create Individual DNC expert', async ({ page }) => {
+  test('Create Individual DNC expert', async ({ page }) => {
     const individualDncPage = new Admin.Dnc.IndividualDnc.IndexPage(page)
     const navBar = new AbstractPage(page)
     await navBar.selectTab('DNC')
     await individualDncPage.openIndividualDncTab()
-    await individualDncPage.openAddPopUp()
-    await individualDncPage.individualDncExpertModal.enterEmail(
-      individualDncExpertData,
+    await individualDncPage.addIndividualDncExpert(individualDncExpertData)
+    const dncRecordItem = individualDncPage.fetchDncRecord(
+      individualDncExpertData.email,
     )
-    await individualDncPage.individualDncExpertModal.enterFirstName(
-      individualDncExpertData,
-    )
-    await individualDncPage.individualDncExpertModal.enterLastName(
-      individualDncExpertData,
-    )
-    await individualDncPage.individualDncExpertModal.selectReason(
-      individualDncExpertData,
-    )
-    await individualDncPage.individualDncExpertModal.saveIndividualDnc()
+    await dncRecordItem.assertPresence()
   })
 })

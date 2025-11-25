@@ -79,6 +79,8 @@ export class IndividualDncExpertModal {
   }
   async saveIndividualDnc() {
     await this.saveButton.click()
+    await this.page.waitForLoadState('networkidle')
+    await this.saveButton.waitFor({ state: 'detached' })
   }
   async cancelIndividualDnc() {
     await this.cancelButton.click()
