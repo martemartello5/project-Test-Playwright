@@ -5,7 +5,9 @@ import { Input } from 'components/Input'
 import { Select } from 'components/Select'
 
 export class IndividualDncExpertModal {
-  readonly email: Select
+  private readonly emailSelect: Select
+  private readonly emailField: Input
+  readonly emailMenuSelect: Select
   readonly linkedinUrl: Select
   readonly firstName: Input
   readonly lastName: Input
@@ -15,10 +17,15 @@ export class IndividualDncExpertModal {
   readonly cancelButton: Button
 
   constructor(readonly page: Page) {
-    ;(((this.email = new Select(
+    ;(((this.emailSelect = new Select(
       page,
       '[data-test-id="individual-dnc-email-select"]',
     )),
+    (this.emailField = new Input(
+      page,
+      '[data-test-id="select-input-individual-dnc-email-select"]',
+    )),
+    (this.emailMenuSelect = new Select(page, `text=Create`)),
     (this.linkedinUrl = new Select(
       page,
       '[data-test-id="individual-dnc-linkedin-select"]',
@@ -47,9 +54,9 @@ export class IndividualDncExpertModal {
   }
 
   async enterEmail(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
-    await this.email.click()
-    await this.email.typeValue(dncExpert.email)
-    await this.email.selectOption(dncExpert.email)
+    await this.emailSelect.click()
+    await this.emailField.fill(dncExpert.email)
+    await this.emailMenuSelect.click()
   }
   async enterLinkedinUrl(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
     await this.linkedinUrl.click()
@@ -57,18 +64,18 @@ export class IndividualDncExpertModal {
     await this.linkedinUrl.selectOption(dncExpert.linkedinUrl)
   }
   async enterFirstName(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
-    await this.firstName.assertValue(dncExpert.firstName)
+    await this.firstName.fill(dncExpert.firstName)
   }
   async enterLastName(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
-    await this.lastName.assertValue(dncExpert.lastName)
+    await this.lastName.fill(dncExpert.lastName)
   }
   async selectReason(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
     await this.reason.click()
-    await this.reason.selectOption(dncExpert.reason)
+    await this.reason.selectOptionbyText(dncExpert.reason)
   }
   async selectRequestedBy(dncExpert: Types.INDIVIDUAL_DNC_EXPERT) {
     await this.requestedBy.click()
-    await this.requestedBy.selectOption(dncExpert.requestedBy)
+    await this.requestedBy.selectOptionbyText(dncExpert.requestedBy)
   }
   async saveIndividualDnc() {
     await this.saveButton.click()

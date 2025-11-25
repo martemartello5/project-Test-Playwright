@@ -22,7 +22,6 @@ test.describe('Individual DNC expert', () => {
     const navBar = new AbstractPage(page)
     await navBar.selectTab('DNC')
     await individualDncPage.openIndividualDncTab()
-    await page.pause()
     await individualDncPage.openAddPopUp()
     await individualDncPage.individualDncExpertModal.enterEmail(
       individualDncExpertData,

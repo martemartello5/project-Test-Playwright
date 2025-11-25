@@ -1,10 +1,7 @@
 import { Locator, Page } from '@playwright/test'
 export class Component {
   readonly component: Locator
-  constructor(
-    readonly page: Page,
-    selector: string,
-  ) {
+  constructor(readonly page: Page, selector: string) {
     this.component = page.locator(selector)
   }
   async click() {
