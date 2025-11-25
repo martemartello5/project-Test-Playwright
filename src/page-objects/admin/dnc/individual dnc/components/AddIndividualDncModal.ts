@@ -17,23 +17,23 @@ export class IndividualDncExpertModal {
   readonly cancelButton: Button
 
   constructor(readonly page: Page) {
-    ;(((this.emailSelect = new Select(
+    ;this.emailSelect = new Select(
       page,
       '[data-test-id="individual-dnc-email-select"]',
-    )),
-    (this.emailField = new Input(
+    ),
+    this.emailField = new Input(
       page,
       '[data-test-id="select-input-individual-dnc-email-select"]',
-    )),
-    (this.emailMenuSelect = new Select(page, `text=Create`)),
-    (this.linkedinUrl = new Select(
+    ),
+    this.emailMenuSelect = new Select(page, `text=Create`),
+    this.linkedinUrl = new Select(
       page,
       '[data-test-id="individual-dnc-linkedin-select"]',
-    ))),
-      (this.firstName = new Input(
+    ),
+      this.firstName = new Input(
         page,
         '[data-test-id="individual-dnc-first-name"]',
-      )))
+      ),
     this.lastName = new Input(page, '[data-test-id="individual-dnc-last-name"]')
     this.reason = new Select(
       page,

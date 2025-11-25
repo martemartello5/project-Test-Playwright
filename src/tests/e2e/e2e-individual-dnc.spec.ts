@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import { Admin } from 'page-objects/admin'
 import { Shared } from 'page-objects/shared'
-import { generateIndividualDncExpert } from 'generator/factory'
+import { Generators } from 'generator/factory'
 import { Types } from 'generator/types'
 import { AbstractPage } from 'page-objects/AbstractPage'
 require('dotenv').config()
@@ -15,7 +15,7 @@ test.describe('Individual DNC expert', () => {
     const signupPage = new AbstractPage(page)
     await signupPage.visit(environment)
     await loginPage.login(admin_email, admin_password)
-    individualDncExpertData = generateIndividualDncExpert()
+    individualDncExpertData = Generators.generateIndividualDncExpert()
   })
   test('Create Individual DNC expert', async ({ page }) => {
     const individualDncPage = new Admin.Dnc.IndividualDnc.IndexPage(page)
